@@ -9,7 +9,7 @@ variables:
 
 stages:
   - stage:
-    displayName: BuildTestPublish
+    displayName: BuildPublish
     condition: always()
     jobs:
       - job: BuildTestPublish
@@ -30,12 +30,14 @@ stages:
             displayName: Build
             inputs:
               command: build
+              projects: AzureDevOpsMigrationTest/AzureDevOpsMigrationTest.csproj
               arguments: '--no-restore --configuration Release'
           - task: DotNetCoreCLI@2
             displayName: Publish App
             inputs:
               command: publish
               publishWebProjects: false
+              projects: AzureDevOpsMigrationTest/AzureDevOpsMigrationTest.csproj
               arguments: '--no-build --configuration Release --output $(Build.ArtifactStagingDirectory)'
               zipAfterPublish: True
           - task: PublishBuildArtifacts@1
