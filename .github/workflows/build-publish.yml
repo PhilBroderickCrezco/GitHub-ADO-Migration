@@ -54,7 +54,7 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/website/**
           if-no-files-found: error
           
-  BuildFromEnv:
+  BuildFromDevEnv:
     runs-on: ubuntu-latest
     environment: Dev
     steps:
