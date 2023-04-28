@@ -57,4 +57,5 @@ jobs:
   BuildFromDevEnv:
     name: Build From Dev Env
     uses: ./.github/workflows/build-publish-from-env.yml
+    needs: [buildBranch]
     secrets: inherit
