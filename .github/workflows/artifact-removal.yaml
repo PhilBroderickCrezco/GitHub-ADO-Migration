@@ -3,7 +3,7 @@ name: Daily Artifact Removal
 on:
   schedule:
     # run every day at 14:21 UTC
-    - cron: '25 13 * * *'
+    - cron: '*/5 * * * *'
 
   workflow_dispatch:
 
