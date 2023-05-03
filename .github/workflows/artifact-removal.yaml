@@ -1,0 +1,17 @@
+name: Daily Artifact Removal
+
+on:
+  schedule:
+    # run every day at 14:21 UTC
+    - cron: '21 14 * * *'
+
+  workflow_dispatch:
+
+jobs:
+  RemoveArtifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove old artifacts
+        uses: c-hive/gha-remove-artifacts@v1
+        with:
+          age: ${{ vars.ARTIFACT_REMOVAL_PERIOD_IN_DAYS }}
