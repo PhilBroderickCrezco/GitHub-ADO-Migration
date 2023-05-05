@@ -17,10 +17,14 @@ on:
         options:
           - Dev
           - Prod
+      buildArtifact:
+        required: false
+        type: string
 
 jobs:
   buildBranch:
     runs-on: ubuntu-latest
+    if: ${{ inputs.buildArtifact == '' }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -60,7 +64,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: website.${{ github.run_number }}
+          name: website.${{ inputs.buildArtifact || github.run_number }}
           
   ProdApproval:
     name: Approve Prod deployment
@@ -79,4 +83,4 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: website.${{ github.run_number }}
+          name: website.${{ inputs.buildArtifact || github.run_number }}
