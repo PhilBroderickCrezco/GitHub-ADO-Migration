@@ -8,6 +8,18 @@ on:
     paths:
       - .github/workflows/build-publish.yml
       - AzureDevOpsMigrationTest/**
+      
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: choice
+        options:
+          - Dev
+          - Prod
+      buildArtifact:
+        required: true
+        type: string
 
 jobs:
   buildBranch:
