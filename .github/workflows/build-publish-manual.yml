@@ -35,7 +35,6 @@ jobs:
         with:
           name: .*website.*
           github_token: ${{ secrets.GH_TOKEN }}
-          workflow: build-publish.yml
           run_id: ${{ inputs.runId }}
           name_is_regexp: true
           
@@ -57,6 +56,5 @@ jobs:
         with:
           name: .*website.*
           github_token: ${{ secrets.GH_TOKEN }}
-          workflow: build-publish.yml
           run_id: ${{ inputs.runId }}
           name_is_regexp: true
