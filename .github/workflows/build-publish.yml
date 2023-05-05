@@ -10,7 +10,7 @@ on:
       - AzureDevOpsMigrationTest/**
   
   workflow_dispatch:
-    input: 
+    inputs: 
       environment:
         required: false
         type: choice
