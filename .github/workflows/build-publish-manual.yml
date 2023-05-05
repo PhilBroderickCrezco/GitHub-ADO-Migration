@@ -34,7 +34,7 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         with:
           name: website.${{ inputs.buildArtifact }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           
   ProdApproval:
     name: Approve Prod deployment
@@ -53,4 +53,4 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         with:
           name: website.${{ inputs.buildArtifact }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
