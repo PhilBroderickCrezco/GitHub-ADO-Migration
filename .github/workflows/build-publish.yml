@@ -75,7 +75,7 @@ jobs:
     environment: Prod-Review
     if: ${{ (inputs.environment != '' && inputs.environment == 'Prod') || (github.ref == 'refs/heads/master' && github.event_name != 'workflow_dispatch') }}
     runs-on: ubuntu-latest
-    needs: [ buildBranch ]
+    needs: [ BuildFromDevEnv ]
     steps:
       - run: "echo Approving Dev Environment deployment"
 
