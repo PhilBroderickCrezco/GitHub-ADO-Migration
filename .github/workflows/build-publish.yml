@@ -67,7 +67,7 @@ jobs:
   DevApproval:
     name: Approve Dev deployment
     environment: Dev-Review
-    if: ${{ github.event.inputs.environment != '' && github.events.inputs.environment = 'Dev' }}
+    if: ${{ github.event.inputs.environment != '' && github.events.inputs.environment == 'Dev' }}
     runs-on: ubuntu-latest
     needs: [buildBranch]
     steps:
