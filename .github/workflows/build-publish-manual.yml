@@ -36,6 +36,7 @@ jobs:
           name: website.${{ inputs.buildArtifact }}
           github_token: ${{ secrets.GH_TOKEN }}
           workflow: build-publish.yml
+          workflow_conclusion: ""
           
   ProdApproval:
     name: Approve Prod deployment
@@ -56,3 +57,4 @@ jobs:
           name: website.${{ inputs.buildArtifact }}
           github_token: ${{ secrets.GH_TOKEN }}
           workflow: build-publish.yml
+          workflow_conclusion: ""
