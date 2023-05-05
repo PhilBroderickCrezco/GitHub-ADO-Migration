@@ -37,6 +37,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           workflow: build-publish.yml
           run_id: ${{ inputs.runId }}
+          name_is_regexp: true
           
   ProdApproval:
     name: Approve Prod deployment
@@ -58,3 +59,4 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           workflow: build-publish.yml
           run_id: ${{ inputs.runId }}
+          name_is_regexp: true
