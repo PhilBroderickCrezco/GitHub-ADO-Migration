@@ -55,6 +55,7 @@ jobs:
   BuildFromDevEnv:
     name: Build From Dev Env
     environment: Dev
+    runs-on: ubuntu-latest
     needs: [DevApproval]
     steps:
       - uses: actions/download-artifact@v3
