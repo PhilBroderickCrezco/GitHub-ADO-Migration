@@ -61,3 +61,22 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: website.${{ github.run_number }}
+          
+  ProdApproval:
+    name: Approve Prod deployment
+    environment: Prod-Review
+    if: ${{ (inputs.environment != '' && inputs.environment == 'Prod') || github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+    needs: [ BuildFromDevEnv ]
+    steps:
+      - run: "echo Approving Dev Environment deployment"
+
+  BuildFromProdEnv:
+    name: Build From Prod Env
+    environment: Prod
+    runs-on: ubuntu-latest
+    needs: [ ProdApproval ]
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: website.${{ github.run_number }}
