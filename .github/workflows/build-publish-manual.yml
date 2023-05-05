@@ -12,9 +12,6 @@ on:
         options:
           - Dev
           - Prod
-      buildArtifact:
-        required: true
-        type: string
       runId:
         required: true
         type: string
@@ -36,7 +33,7 @@ jobs:
     steps:
       - uses: dawidd6/action-download-artifact@v2
         with:
-          name: website.${{ inputs.buildArtifact }}
+          name: website
           github_token: ${{ secrets.GH_TOKEN }}
           workflow: build-publish.yml
           run_id: ${{ inputs.runId }}
@@ -57,7 +54,7 @@ jobs:
     steps:
       - uses: dawidd6/action-download-artifact@v2
         with:
-          name: website.${{ inputs.buildArtifact }}
+          name: website
           github_token: ${{ secrets.GH_TOKEN }}
           workflow: build-publish.yml
           run_id: ${{ inputs.runId }}
