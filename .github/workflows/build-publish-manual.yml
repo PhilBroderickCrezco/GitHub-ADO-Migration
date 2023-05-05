@@ -15,6 +15,9 @@ on:
       buildArtifact:
         required: true
         type: string
+      runId:
+        required: true
+        type: string
 
 jobs:
   DevApproval:
@@ -36,7 +39,7 @@ jobs:
           name: website.${{ inputs.buildArtifact }}
           github_token: ${{ secrets.GH_TOKEN }}
           workflow: build-publish.yml
-          workflow_conclusion: ""
+          run_id: ${{ inputs.runId }}
           
   ProdApproval:
     name: Approve Prod deployment
@@ -57,4 +60,4 @@ jobs:
           name: website.${{ inputs.buildArtifact }}
           github_token: ${{ secrets.GH_TOKEN }}
           workflow: build-publish.yml
-          workflow_conclusion: ""
+          run_id: ${{ inputs.runId }}
