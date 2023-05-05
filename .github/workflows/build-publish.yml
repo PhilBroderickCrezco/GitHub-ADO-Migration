@@ -46,7 +46,7 @@ jobs:
   DevApproval:
     name: Approve Dev deployment
     environment: Dev-Review
-    if: ${{ (inputs.environment != '' && inputs.environment == 'Dev') || github.ref == 'refs/heads/master' }}
+    if: ${{ (inputs.environment != '' && inputs.environment == 'Dev') || (github.ref == 'refs/heads/master' && github.event_name != 'workflow_dispatch') }}
     runs-on: ubuntu-latest
     needs: [buildBranch]
     steps:
@@ -65,7 +65,7 @@ jobs:
   ProdApproval:
     name: Approve Prod deployment
     environment: Prod-Review
-    if: ${{ (inputs.environment != '' && inputs.environment == 'Prod') || github.ref == 'refs/heads/master' }}
+    if: ${{ (inputs.environment != '' && inputs.environment == 'Prod') || (github.ref == 'refs/heads/master' && github.event_name != 'workflow_dispatch') }}
     runs-on: ubuntu-latest
     needs: [ BuildFromDevEnv ]
     steps:
