@@ -21,9 +21,6 @@ on:
         type: boolean
         default: false
 
-env:
-  ALLOW_DEPLOY: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
-
 jobs:
   buildBranch:
     if: ${{ inputs.runId == '' }}
@@ -53,6 +50,8 @@ jobs:
           if-no-files-found: error
     
   NestedWorkflow:
+    env:
+      ALLOW_DEPLOY: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
     name: Nested Workflow
     uses: ./.github/workflows/nested-workflow.yaml
     with:
