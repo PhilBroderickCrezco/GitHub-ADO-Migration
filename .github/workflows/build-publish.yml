@@ -51,7 +51,6 @@ jobs:
     
   NestedWorkflow:
     name: Nested Workflow
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/nested-workflow.yaml
     with:
       allowDeploy: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
