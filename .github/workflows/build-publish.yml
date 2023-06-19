@@ -53,7 +53,7 @@ jobs:
     name: Nested Workflow
     uses: ./.github/workflows/nested-workflow.yaml
     with:
-      allowDeploy: ${{ inputs.allowDeploy == '' && false || inputs.allowDeploy }}
+      allowDeploy: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
   
   DevApproval:
     name: Approve Dev deployment
