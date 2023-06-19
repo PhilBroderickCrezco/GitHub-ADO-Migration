@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        if: ${{ inputs.AllowDeploy }}
+        if: ${{ github.ref == 'refs/heads/master' || inputs.allowDeploy }}
         run: echo "true"
 
       - name: Test
