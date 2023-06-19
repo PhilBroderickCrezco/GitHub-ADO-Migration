@@ -21,6 +21,9 @@ on:
         type: boolean
         defaultValue: false
 
+env:
+  ALLOW_DEPLOY: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
+
 jobs:
   buildBranch:
     if: ${{ inputs.runId == '' }}
@@ -53,7 +56,7 @@ jobs:
     name: Nested Workflow
     uses: ./.github/workflows/nested-workflow.yaml
     with:
-      allowDeploy: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
+      allowDeploy: ${{ env.ALLOW_DEPLOY }}
   
   DevApproval:
     name: Approve Dev deployment
