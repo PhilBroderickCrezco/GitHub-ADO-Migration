@@ -19,7 +19,7 @@ on:
         type: string
       allowDeploy:
         type: boolean
-        defaultValue: false
+        default: false
 
 env:
   ALLOW_DEPLOY: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
