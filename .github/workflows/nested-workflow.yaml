@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Test
         if: ${{ inputs.AllowDeploy }}
-        run: Echo "true"
+        run: echo "true"
 
       - name: Test
-        run: Echo "run always"
+        run: echo "run always"
