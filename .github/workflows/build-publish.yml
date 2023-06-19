@@ -14,52 +14,48 @@ on:
         options:
           - Dev
           - Prod
-      buildArtifact:
+      runId:
         required: true
         type: string
+      allowDeploy:
+        type: boolean
+        defaultValue: false
 
 jobs:
   buildBranch:
+    if: ${{ inputs.runId == '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        if: ${{ inputs.buildArtifact == '' }}
         
       - name: Setup .NET
-        if: ${{ inputs.buildArtifact == '' }}
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
           
       - name: Restore dependencies
         run: dotnet restore
-        if: ${{ inputs.buildArtifact == '' }}
         
       - name: Build
         run: dotnet build --no-restore -c Release
-        if: ${{ inputs.buildArtifact == '' }}
         
       - name: Publish
         run: dotnet publish --no-build AzureDevOpsMigrationTest/AzureDevOpsMigrationTest.csproj -c Release -o ${{env.DOTNET_ROOT}}/website
-        if: ${{ inputs.buildArtifact == '' }}
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
-        if: ${{ inputs.buildArtifact == '' }}
         with:
           name: website.${{ github.run_number }}
           path: ${{env.DOTNET_ROOT}}/website/**
           if-no-files-found: error
-             
-  DevApproval:
-    name: Approve Dev deployment
-    environment: Dev-Review
-    if: ${{ (inputs.environment != '' && inputs.environment == 'Dev') || (github.ref == 'refs/heads/master' && github.event_name != 'workflow_dispatch') }}
-    runs-on: ubuntu-latest
-    needs: [buildBranch]
-    steps:
-      - run: "echo Approving Dev Environment deployment"
     
+  NestedWorkflow:
+    name: Nested Workflow
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/nested-workflow.yaml
+    with:
+      allowDeploy: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
+  
   BuildFromDevEnv:
     name: Build From Dev Env
     environment: Dev

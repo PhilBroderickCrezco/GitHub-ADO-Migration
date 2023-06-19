@@ -1,0 +1,19 @@
+name: Nested Workflow
+
+on:
+  workflow_call:
+    inputs:
+      allowDeploy:
+        default: false
+        type: boolean
+
+jobs:
+  CheckInput:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        if: ${{ inputs.AllowDeploy }}
+        run: Echo "true"
+
+      - name: Test
+        run: Echo "run always"
