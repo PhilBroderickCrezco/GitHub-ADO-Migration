@@ -50,12 +50,10 @@ jobs:
           if-no-files-found: error
     
   NestedWorkflow:
-    env:
-      ALLOW_DEPLOY: ${{ inputs.allowDeploy == '' && 'false' || inputs.allowDeploy }}
     name: Nested Workflow
     uses: ./.github/workflows/nested-workflow.yaml
     with:
-      allowDeploy: ${{ env.ALLOW_DEPLOY }}
+      allowDeploy: ${{ (inputs.allowDeploy == '' && false || inputs.allowDeploy ) || (github.ref == 'refs/heads/master' && github.event_name != 'workflow_dispatch' && inputs.allowDeploy) }}
   
   DevApproval:
     name: Approve Dev deployment
